@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="static/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>Survey</title>
+</head>
+<body>
+<div class="background">
+    <div>
+        <h1>Music Generation Survey</h1>
+    </div>
+    <div id="instructions-container">
+        <div style="margin: 30px; padding: 20px; text-align: center; background-color: rgba(100, 100, 255, 0.4);">
+            <h2 style="color: white;">For the "Background and Knowledge" tab, please provide the most accurate answer you can</h2>
+        </div>
+    </div>
+    <div id="start-questions-container">
+        <div class="start-block" id="start-block" onclick="checkComplete('start-block')">
+            <h2 class="start-block-header" onclick="toggleCollapse(document.getElementById('intro-heading'), document.getElementById('intro-collapse'))" id="intro-heading">&#9206 Background and Knowledge</h2>
+            <div class="collapsible-content start-questions" id="intro-collapse">
+                <div class="question-block" id="often-question">
+                    <p class="center">How often do you listen to music?</p>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="1hr" value="1hr" name="often">
+                            <label for="1hr">I listen to music less than 1 hour per week</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="1-15hr" value="1-15hr" name="often">
+                            <label for="1-15hr">I listen to music between 1 and 15 hours per week</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="15hr" value="15hr" name="often">
+                            <label for="15hr">I listen to music more than 15 hours per week</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="question-block" id="studied-question">
+                    <p class="center">How long have you studied music with a private teacher or in school?</p>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="nostudy" value="nostudy" name="studied">
+                            <label for="nostudy">I have not studied music with a teacher or in school</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="somestudy" value="somestudy" name="studied">
+                            <label for="somestudy">I have studied music for 5 years or less</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="muchstudy" value="muchstudy" name="studied">
+                            <label for="muchstudy">I have studied music for more than 5 years</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="question-block" id="meter-question">
+                    <div class="center">
+                        <p class="center">What could be the rhythmic meter of this excerpt?</p>
+                        <audio controls src="static/media/background/mozart_twinkle.mp3"></audio>
+                    </div>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="98" value="98" name="meter">
+                            <label for="98">9/8</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="44" value="44" name="meter">
+                            <label for="44">4/4</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="35" value="35" name="meter">
+                            <label for="35">3/5</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="question-block" id="interval-question">
+                    <div class="center">
+                        <p class="center">What is the name of the melodic interval of this excerpt?</p>
+                        <audio controls src="static/media/background/interval.mp3"></audio>
+                    </div>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="m3" value="m3" name="interval">
+                            <label for="m3">Minor 3rd</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="f4" value="f4" name="interval">
+                            <label for="f4">Flawed 4th</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="p4" value="p4" name="interval">
+                            <label for="p4">Perfect 4th</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div style="margin: 30px; padding: 20px; text-align: center; background-color: rgba(100, 100, 255, 0.4);">
+            <h2 style="color: white;">For the following, please listen to the entirety of each melody pair and indicate your preferences</h2>
+            <h3 style="color: white">Results are best if you are in a quiet environment with headphones</h3>
+        </div>
+    </div>
+    <div id="comparisons-container">
+        <div class="compare-block" id="compare-1-2" onclick="checkComplete('compare-1-2')"></div>
+        <div class="compare-block" id="compare-3-4" onclick="checkComplete('compare-3-4')"></div>
+        <div class="compare-block" id="compare-5-6" onclick="checkComplete('compare-5-6')"></div>
+        <div class="compare-block" id="compare-7-8" onclick="checkComplete('compare-7-8')"></div>
+        <div class="compare-block" id="compare-9-10" onclick="checkComplete('compare-9-10')"></div>
+    </div>
+    <div id="submission-container">
+        <button id="submit-button" class="active-button" onclick="submitSurvey()">Submit</button>
+    </div>
+    <script>
+        createMelodyCompareBlock("compare-1-2", 1, 2, "flowMachines", "schenkComposer_noreverb")
+        createMelodyCompareBlock("compare-3-4", 3, 4, "schenkComposer_noreverb", "flowMachines")
+        createMelodyCompareBlock("compare-5-6", 5, 6, "flowMachines", "schenkComposer_noreverb")
+        createMelodyCompareBlock("compare-7-8", 7, 8, "human", "random")
+        createMelodyCompareBlock("compare-9-10", 9, 10, "human", "error")
+    </script>
+</div>
+</body>
+
+</html>
